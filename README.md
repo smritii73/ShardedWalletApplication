@@ -873,15 +873,15 @@ PESSIMISTIC_FORCE_INCREMENT:
 ```
 ┌──────────────────────────────────────────────────────┐
 │ @Transactional                                       │
-│ public boolean execute(SagaContext sagaContext) {   │
+│ public boolean execute(SagaContext sagaContext) {    │
 │                                                      │
-│   // LOCK ACQUIRED HERE                             │
-│   Wallet wallet = findByUserIdWithLock(userId);    │
+│   // LOCK ACQUIRED HERE                              │
+│   Wallet wallet = findByUserIdWithLock(userId);      │
 │                                                      │
-│   wallet.debit(amount);                             │
-│   walletRepository.save(wallet);                    │
+│   wallet.debit(amount);                              │
+│   walletRepository.save(wallet);                     │
 │                                                      │
-│   // LOCK RELEASED HERE (method ends)              │
+│   // LOCK RELEASED HERE (method ends)                │
 │ }                                                    │
 └──────────────────────────────────────────────────────┘
 
@@ -957,11 +957,5 @@ You write normal queries, sharding is transparent!
 | Insufficient balance | Not enough money | Use /credit endpoint |
 | Cannot transfer to same user | fromUserId == toUserId | Use different users |
 | Sharding error | Database missing | Create realshard1 and realshard2 |
-
-## What You Learned
-
-1. **Saga Pattern** - Multi-step distributed transactions
-2. **Database Sharding** - Horizontal scaling with ShardingSphere
-3. **Pessimistic Locking** - Prevent race conditions
-4. **Transaction Rollback** - Compensating transactions
 5. **Orchestration** - Coordinate workflow steps
+
